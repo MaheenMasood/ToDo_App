@@ -27,6 +27,14 @@ function App() {
     }
   };
 
+  const handleUpdate = (_id, text) => {
+    updateMode(_id, text);
+  };
+  
+  const handleDelete = (_id) => {
+    deleteToDo(_id, setToDo);
+  };
+
   return (
     <div className="App">
       <div className="container">
@@ -44,15 +52,14 @@ function App() {
         </div>
 
         <div className="list">
-          {toDo.length > 0 &&
-            toDo.map((item) => (
-              <ToDo
-                key={item._id}
-                text={item.text}
-                updateMode={() => updateMode(item._id, item.text)}
-                deleteToDo={() => deleteToDo(item._id, setToDo)}
-              />
-            ))}
+          {toDo.length > 0 && toDo.map((item) => (
+            <ToDo
+              key={item._id}
+              text={item.text}
+              updateMode={() => handleUpdate(item._id, item.text)}
+              deleteToDo={() => handleDelete(item._id)}
+            />
+          ))}
         </div>
       </div>
     </div>
